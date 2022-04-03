@@ -15,7 +15,25 @@
 			<aside id="colorlib-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-				   	<li style="background-image: url(assets/images/img_bg_1.jpg);">
+
+					<?php 
+						session_start();
+						include_once './administrative/connect.php';
+						
+						$select_carousel = "SELECT * FROM `carousel`";
+						$result_carousel = mysqli_query($conn,$select_carousel);
+					?>
+
+					<?php 
+						while($dados = mysqli_fetch_assoc($result_carousel)):
+						$id = $dados['id_carousel'];
+						$img1 = $dados['img_1'];
+						$img2 = $dados['img_2'];
+						$img3 = $dados['img_3'];
+					?>
+					<?php endwhile; ?>
+
+				   	<li style="background-image: url('./administrative/php/<?= $img1 ?>');">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -31,7 +49,7 @@
 					   		</div>
 				   		</div>
 				   	</li>
-				   	<li style="background-image: url(images/img_bg_2.jpg);">
+				   	<li style="background-image: url('./administrative/php/<?= $img2 ?>');">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -47,7 +65,7 @@
 					   		</div>
 				   		</div>
 				   	</li>
-				   	<li style="background-image: url(images/img_bg_3.jpg);">
+				   	<li style="background-image: url('./administrative/php/<?= $img3 ?>');">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -242,7 +260,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-1.jpg);">
+							<div class="project" style="background-image: url(images/cover_bg_1.jpg);">
 								<div class="desc">
 									<div class="con">
 										<h3><a href="work.html">Work 01</a></h3>
