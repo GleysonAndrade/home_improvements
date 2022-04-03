@@ -73,24 +73,24 @@
                                             $name = $dados['name'];
                                             $description = $dados['description'];
                                             $date = $dados['date_register'];
-                                            $img_1 = $dados['img_1'];
-                                            $img_2 = $dados['img_2'];
-                                            $img_3 = $dados['img_3'];
+                                            $img1 = $dados['img_1'];
+                                            $img2 = $dados['img_2'];
+                                            $img3 = $dados['img_3'];
                                             echo "
 
                                                 <tr>
                                                     <td>$id</td>
                                                     <td>$name</td>
                                                     <td>$description</td>
-                                                    <td><img width='50' src='php/$img_1'></td>
-                                                    <td><img width='50' src='php/$img_2'></td>
-                                                    <td><img width='50' src='php/$img_3'></td>
+                                                    <td><img width='50' src='php/$img1'></td>
+                                                    <td><img width='50' src='php/$img2'></td>
+                                                    <td><img width='50' src='php/$img3'></td>
                                                     
                                                     <td>$date</td>";
 
                                             echo "
 
-                                                <td><a class='editarusr' data-id='$id' data-name='$name' data-msg='$description' data-img1='$img_1' data-img2='$img_2' data-img3='$img_3'>TO EDIT</a></td>
+                                                <td><a class='editarusr' data-id='$id' data-name='$name' data-msg='$description' data-img1='$img1' data-img2='$img2' data-img3='$img3'>TO EDIT</a></td>
                                                 <td><a class='excluir' data-id = '$id' data-name='$name' href='#'>DELETE</a></td>
                                                 </tr>
                                             ";
@@ -532,14 +532,9 @@
                         });
                     });
                 </script>
-
-
-
-
                 <!-- Core JS -->
                 <script src="assets/js/app.min.js"></script>
                 <script src="assets/js/script.js"></script>
-
 
 </body>
 <?php

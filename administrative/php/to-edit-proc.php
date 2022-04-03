@@ -18,12 +18,12 @@ if(isset($_FILES["img1"])) {
     $img1 = $archive_name;
 }
 
-if($_FILES['img1']['name'] == ""){
-    $upadate1 = "UPDATE `carousel` SET `name`='$name',`description`='$description' WHERE `carousel`.`id_carousel`='$id'";
-    $result1 = mysqli_query($conn, $upadate1);
-}else{
-    $upadate1 = "UPDATE `carousel` SET `name`='$name',`description`='$description' `img_1`='$img1' WHERE `carousel`.`id_carousel`='$id'";
-    $result1 = mysqli_query($conn, $upadate1);
+if ($_FILES['img1']['name'] == "") {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
+} else {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description', `img_1` = '$img1' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
 }
 
 if(isset($_FILES["img2"])){
@@ -35,12 +35,12 @@ if(isset($_FILES["img2"])){
     $img2 = $archive_name2;
 }
 
-if($_FILES['img2']['name'] == ""){
-    $upadate2 = "UPDATE `carousel` SET `name`='$name',`description`='$description' WHERE `carousel`.`id_carousel`='$id'";
-    $result2 = mysqli_query($conn, $upadate2);
-}else{
-    $upadate2 = "UPDATE `carousel` SET `name`='$name',`description`='$description' `img_2`='$img2' WHERE `carousel`.`id_carousel`='$id'";
-    $result2 = mysqli_query($conn, $upadate2);
+if ($_FILES['img2']['name'] == "") {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
+} else {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description', `img_2` = '$img2' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
 }
 
 if(isset($_FILES["img3"])) {
@@ -52,20 +52,18 @@ if(isset($_FILES["img3"])) {
     $img3 = $archive_name3;
 }
 
-if($_FILES['img3']['name'] == ""){
-    $upadate3 = "UPDATE `carousel` SET `name`='$name',`description`='$description' WHERE `carousel`.`id_carousel`='$id'";
-    $result3 = mysqli_query($conn, $upadate3);
-}else{
-    $upadate3 = "UPDATE `carousel` SET `name`='$name',`description`='$description' `img_3`='$img3' WHERE `carousel`.`id_carousel`='$id'";
-    $result3 = mysqli_query($conn, $upadate3);
+if ($_FILES['img3']['name'] == "") {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
+} else {
+    $update = "UPDATE `carousel` SET `name` = '$name', `description` = '$description', `img_3` = '$img3' WHERE `carousel`.`id_carousel` = '$id'";
+    $result = mysqli_query($conn, $update);
 }
-
-echo $upadate3;
 
 $verify = $conn->affected_rows;
 if($verify == 0){
-    // header("Location: ../carousel_home.php");
+    header("Location: ../carousel_home.php");
 }else{
-    // header("Location: ../carousel_home.php");
+    header("Location: ../carousel_home.php");
 }
 ?>
