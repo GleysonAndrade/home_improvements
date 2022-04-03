@@ -2,7 +2,7 @@
 session_start();
 include_once '../connect.php';
 
-echo $date = date('m/d/Y');
+$date = date('m/d/Y');
 
 $name = htmlspecialchars($_POST['name'], ENT_QUOTES,'UTF-8');
 $description = htmlspecialchars($_POST['description'], ENT_QUOTES,'UTF-8');

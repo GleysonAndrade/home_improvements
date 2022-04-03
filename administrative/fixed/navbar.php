@@ -30,8 +30,8 @@
                 </ul>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="usuario.php">
-                            Usuários App
+                        <a href="who_we_are.php">
+                            Who We Are
                         </a>
                     </li>
                 </ul>
