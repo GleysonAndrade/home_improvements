@@ -33,7 +33,7 @@
 					?>
 					<?php endwhile; ?>
 
-				   	<li style="background-image: url('./administrative/php/<?= $img1 ?>');">
+				   	<li style="background-image: url('./administrative/php/<?= $img1 ?>'); width:1280; height:1280;">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
