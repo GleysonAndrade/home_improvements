@@ -4,7 +4,7 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			
-			<?php include_once './fixed/navbar.php' ?>
+			<?php include_once './fixed/navbar2.php' ?>
 
 			<?php include_once './fixed/redesocial.php' ?>
 

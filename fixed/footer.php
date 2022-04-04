@@ -1,5 +1,5 @@
 <!-- jQuery -->
-<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
 	<script src="./assets/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -18,3 +18,13 @@
 	
 	<!-- MAIN JS -->
 	<script src="./assets/js/main.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$(".cor").click(function (e) { 
+				
+				$(".cor").removeClass("colorlib-active");
+				$(this).addClass("colorlib-active");
+			});
+		});
+	</script>

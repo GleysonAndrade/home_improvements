@@ -3,8 +3,8 @@
 <br><br>
 <nav id="colorlib-main-menu" role="navigation">
     <ul>
-        <li class="colorlib-active"><a href="index.php">Home</a></li>
-        <li class=""><a href="work.php">Project</a></li>
+        <li class=""><a href="index.php">Home</a></li>
+        <li class="colorlib-active "><a href="work.php">Project</a></li>
         <li class=""><a href="about.php">About</a></li>
         <li class=""><a href="services.php">Services</a></li>
         <!-- <li><a href="blog.php">Blog</a></li> -->
