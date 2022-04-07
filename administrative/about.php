@@ -54,6 +54,7 @@
                                             <th>ID</th>
                                             <th>NAME</th>
                                             <th>DESCRIPTION</th>
+                                            <th>IMAGE</th>
                                             <th>DATE REGISTER</th>
                                             <th>TO EDIT</th>
                                             <th>DELETE</th>
@@ -69,6 +70,7 @@
                                             $id = $dados['id_who'];
                                             $title = $dados['title'];
                                             $text = $dados['text'];
+                                            $img = $dados['img'];
                                             $date = $dados['date_register'];
 
                                             echo "
@@ -77,11 +79,12 @@
                                                     <td>$id</td>
                                                     <td>$title</td>
                                                     <td>$text</td>
+                                                    <td><img width='50' src='php/$img'></td>
                                                     <td>$date</td>";
 
                                             echo "
 
-                                                <td><a class='editarusr' data-id='$id' data-title='$title' data-msg='$text'>TO EDIT</a></td>
+                                                <td><a class='editarusr' data-id='$id' data-title='$title' data-msg='$text' data-img='$img'>TO EDIT</a></td>
                                                 <td><a class='excluir' data-id = '$id' data-title='$title' href='#'>DELETE</a></td>
                                                 </tr>
                                             ";
@@ -94,6 +97,7 @@
                                             <th>ID</th>
                                             <th>NAME</th>
                                             <th>DESCRIPTION</th>
+                                            <th>IMAGE</th>
                                             <th>DATE REGISTER</th>
                                             <th>TO EDIT</th>
                                             <th>DELETE</th>
@@ -152,10 +156,17 @@
                                 <h5 class="modal-title" id="contaBC2">Register Who We Are Home</h5>
                             </div>
                             <div class="modal-body">
-                                <form action="javascript:void(0)" id="form_registration" enctype="multipart/form-data" method="post" novalidate>
+                                <form action="javascript:void(0)" id="form_about" enctype="multipart/form-data" method="post" novalidate>
                                     <div class="container">
                                         <div class="row">
                                             <input type="text" hidden class="form-control idIn" name="id" value="<?= $id_carousel ?>">
+                                            <div class="col-md-12">
+                                                <div style="position:relative; text-align:center;">
+                                                    <img src="" id="imgPreview" style="border-radius: 10px;" width="100" height="100" />
+                                                </div>
+                                                <p class="text-center">Load Image</p>
+                                                <input type="file" class="form-control file" id="photo" name="img" style="position: relative; left:41%; width:150px; top: -28px; opacity:0;" />
+                                            </div>
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label for="nome">Name</label>
@@ -212,6 +223,13 @@
                                 <form action="./php/to-edit-who-proc.php" enctype="multipart/form-data" id="newedit" method="post">
                                     <div class="row">
                                         <input type="text" hidden class="form-control idIn" name="id" value="<?= $id ?>">
+                                        <div class="col-md-12">
+                                            <div style="position:relative; text-align:center;">
+                                                <img src="" id="imgPreview1" class="imgIn" style="border-radius: 10px;" width="100" height="100" />
+                                            </div>
+                                            <p class="text-center">Load Image</p>
+                                            <input type="file" class="form-control imgIn" id="photo1" name="img" style="position: relative; left:41%; width:150px; top: -28px; opacity:0;" />
+                                        </div>
                                         <div class="container">
                                             <div class=" form-group">
                                                 <div class="col-md-12">
@@ -267,12 +285,13 @@
                 $(document).ready(function() {
 
                     $(function() {
-                        $("#form_registration").submit(function(e) {
+                        $("#form_about").submit(function(e) {
                             var title = $("#title").val();
                             var text = $("#text").val();
                             var dados = new FormData();
                             dados.append("title", title);
                             dados.append("text", text);
+                            dados.append("img", $("#photo")[0].files[0]);
 
                             $.ajax({
                                 type: "POST",
@@ -284,7 +303,7 @@
                                     console.log(data);
                                     $('#saveModal').modal('show');
                                     $('body').on('click', '#close', function() {
-                                        window.location = "./who_we_are.php";
+                                        window.location = "./about.php";
                                     });
                                 },
                             });
@@ -304,6 +323,7 @@
                         $("#editar_usr .idIn").val(this.dataset.id)
                         $("#editar_usr .titleIn").val(this.dataset.title)
                         $("#editar_usr .msgIn").val(this.dataset.msg)
+                        $("#editar_usr .imgIn").attr("src", "php/" + this.dataset.img)
                     });
                     $(".enviando_sub").click(function() {
                         $(this).attr("disabled", "")
@@ -312,7 +332,7 @@
                             $(this).removeAttr("disabled")
                         } else {
                             $("#newedit").submit();
-                            // window.location = "./carousel_home.php";
+                            window.location = "./about.php";
                         }
                     });
 
@@ -375,6 +395,31 @@
                                 })
                         })
                     })
+
+                    // preview imagem 
+                    $("#photo").change(function() {
+                        const file = this.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                $("#imgPreview")
+                                    .attr("src", event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    // preview imagem 1 
+                    $("#photo1").change(function() {
+                        const file = this.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                $("#imgPreview1")
+                                    .attr("src", event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
 
                     // tinymce.init({
                     //     language: 'pt_BR',

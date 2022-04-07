@@ -28,10 +28,22 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <!-- page about -->
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-home"></i>
+                    </span>
+                    <span class="title">About-Job</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="who_we_are.php">
-                            Who We Are
+                        <a href="about.php">
+                            About
                         </a>
                     </li>
                 </ul>
