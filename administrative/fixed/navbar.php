@@ -46,6 +46,11 @@
                             About
                         </a>
                     </li>
+                    <li>
+                        <a href="question.php">
+                            Questions
+                        </a>
+                    </li>
                 </ul>
             </li>
             </li>

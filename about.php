@@ -62,7 +62,7 @@
 					<div class="row">
 						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
 							<h2 class="colorlib-heading">History</h2>
-							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country.</p>
+							<p><?= $text ?></p>
 						</div>
 						<div class="col-md-8 animate-box" data-animate-effect="fadeInRight">
 							<div class="fancy-collapse-panel">
