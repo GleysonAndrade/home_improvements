@@ -22,13 +22,13 @@ if ($_FILES['img']['name'] == "") {
 } else {
     $update = "UPDATE `who_we_are` SET `title` = '$title', `text` = '$text', `img` = '$img' WHERE `who_we_are`.`id_who` = '$id'";
     $result = mysqli_query($conn, $update);
-    echo $result;
+    // echo $update;
 }
 
 $verify = $conn->affected_rows;
 if($verify == 0){
-    header("Location: ../who_we_are.php");
+    header("Location: ../about.php");
 }else{
-    header("Location: ../who_we_are.php");
+    header("Location: ../about.php");
 }
 ?>

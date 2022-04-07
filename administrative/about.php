@@ -332,7 +332,7 @@
                             $(this).removeAttr("disabled")
                         } else {
                             $("#newedit").submit();
-                            window.location = "./about.php";
+                            // window.location = "./about.php";
                         }
                     });
 
