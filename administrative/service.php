@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Administrative - Services</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo.png">
+
+    <!-- page css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <link href="assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Core css -->
+    <link href="./assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app">
+        <div class="layout">
+            <?php
+
+            include './fixed/navbar.php';
+
+            include './fixed/header.php';
+            // header
+            ?>
+
+            <!-- Page Container START -->
+            <div class="page-container">
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    <div class="card">
+                        <div class="card-body" style="overflow-x: auto;">
+                            <h4>Table Service</h4>
+                            <!-- <p>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. Below is an example of zero configuration.</p> -->
+                            <div class="col-xs-0 col-md-0 col-lg-0" align="right">
+                                <a name="" id="" class="btn btn-sm btn-primary" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#add">Add Service</a>
+                            </div>
+                            <div class="m-t-25">
+                                <table id="data-table" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NAME</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>IMAGE</th>
+                                            <th>DATE REGISTER</th>
+                                            <th>TO EDIT</th>
+                                            <th>DELETE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include 'connect.php';
+
+                                        $sql = "SELECT * FROM `service` ORDER BY id_service ASC";
+                                        $query = mysqli_query($conn, $sql);
+                                        while ($dados = mysqli_fetch_assoc($query)) {
+                                            $id = $dados['id_service'];
+                                            $name = $dados['name'];
+                                            $description = $dados['description'];
+                                            $img = $dados['img'];
+                                            $date = $dados['date_register'];
+
+                                            echo "
+
+                                                <tr>
+                                                    <td>$id</td>
+                                                    <td>$name</td>
+                                                    <td>$description</td>
+                                                    <td><img width='50' src='php/$img'></td>
+                                                    <td>$date</td>";
+
+                                            echo "
+
+                                                <td><a class='editarusr' data-id='$id' data-name='$name' data-msg='$description' data-img='$img'>TO EDIT</a></td>
+                                                <td><a class='excluir' data-id = '$id' data-name='$name' href='#'>DELETE</a></td>
+                                                </tr>
+                                            ";
+                                        }
+
+                                        ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NAME</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>IMAGE</th>
+                                            <th>DATE REGISTER</th>
+                                            <th>TO EDIT</th>
+                                            <th>DELETE</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                include "./fixed/footer.php";
+                ?>
+                <!-- Modal -->
+                <div class="modal fade" id="excluirModal" tabindex="-1" role="dialog" aria-labelledby="excluirModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="excluirModalLabel">Confirmation</h5>
+                                <button id="btn_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button id="btn_exluir_nao" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button id="btn_exluir_sim" type="button" class="btn btn-primary">Yes</button>
+                                <button id="btn_confirm" type="button" class="btn btn-primary" data-dismiss="modal" hidden>OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="contaBC" tabindex="-1" role="dialog" aria-labelledby="contaBC" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" style="max-width: 85%;" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="contaBC2">Data carousel</h5>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button id="btn_confirm_asessorModal" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- popup to register carousel images from home page -->
+                <div class="modal fade" id="add" enctype="multipart/form-data" tabindex="-1" role="dialog" aria-labelledby="contaBC" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="min-width: 65%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="contaBC2">Register Service Home</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="javascript:void(0)" id="form_service" enctype="multipart/form-data" method="post" novalidate>
+                                    <div class="container">
+                                        <div class="row">
+                                            <input type="text" hidden class="form-control idIn" name="id" value="<?= $id_service ?>">
+                                            <div class="col-md-12">
+                                                <div style="position:relative; text-align:center;">
+                                                    <img src="" id="imgPreview" style="border-radius: 10px;" width="100" height="100" />
+                                                </div>
+                                                <p class="text-center">Load Image</p>
+                                                <input type="file" class="form-control file" id="photo" name="img" style="position: relative; left:41%; width:150px; top: -28px; opacity:0;" />
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="nome">Name</label>
+                                                    <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="Enter a name for service" style="width: 780px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="from-group col-md-12">
+                                            <label for="description">Description</label>
+                                            <textarea name="description" class="form-control" id="description" cols="30" rows="6" aria-describedby="helpId" placeholder="Enter a description for service" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="btn_confirm_asessorModal" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button id="salvar" type="submit" class="btn btn-success">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal service save success -->
+                <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" bg-success>
+                                <h5 class="modal-title">Success Service</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Service successfully registered!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="close">OK</button>
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editar_usr" tabindex="-1" role="dialog" aria-labelledby="contaBC" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="min-width: 65%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="contaBC2">To Edit Service</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="./php/to-edit-service-proc.php" enctype="multipart/form-data" id="newedit" method="post">
+                                    <div class="row">
+                                        <input type="text" hidden class="form-control idIn" name="id" value="<?= $id ?>">
+                                        <div class="col-md-12">
+                                            <div style="position:relative; text-align:center;">
+                                                <img src="" id="imgPreview1" class="imgIn" style="border-radius: 10px;" width="100" height="100" />
+                                            </div>
+                                            <p class="text-center">Load Image</p>
+                                            <input type="file" class="form-control imgIn" id="photo1" name="img" style="position: relative; left:41%; width:150px; top: -28px; opacity:0;" />
+                                        </div>
+                                        <div class="container">
+                                            <div class=" form-group">
+                                                <div class="col-md-12">
+                                                    <label for="nome">Name</label>
+                                                    <input type="text" class="form-control nameIn" name="name" id="name" aria-describedby="helpId" placeholder="" style="width: 780px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="from-group col-md-12">
+                                            <label for="description">Description</label>
+                                            <textarea name="description" class="form-control msgIn" id="" cols="30" rows="6" aria-describedby="helpId" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="content msgIn">
+                                        <!-- <input type="text" class="msgIn"> -->
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="btn_confirm_asessorModal" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button id="" type="button" class="btn btn-success enviando_sub">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app">
+        <div class="layout">
+            <?php
+
+            include './fixed/navbar.php';
+
+            include './fixed/header.php';
+            // header
+            ?>
+
+            <!-- Page Container START -->
+            <div class="page-container"></div>
+
+
+            <!-- page js -->
+
+            <script src="assets/vendors/datatables/jquery.dataTables.min.js?id=x"></script>
+            <script src="assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+
+
+            <script>
+                $(document).ready(function() {
+
+                    $(function() {
+                        $("#form_service").submit(function(e) {
+                            var name = $("#name").val();
+                            var description = $("#description").val();
+                            var dados = new FormData();
+                            dados.append("name", name);
+                            dados.append("description", description);
+                            dados.append("img", $("#photo")[0].files[0]);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "php/add-service.php",
+                                data: dados,
+                                processData: false,
+                                contentType: false,
+                                success: function(data) {
+                                    console.log(data);
+                                    $('#saveModal').modal('show');
+                                    $('body').on('click', '#close', function() {
+                                        window.location = "./service.php";
+                                    });
+                                },
+                            });
+                        })
+                    })
+
+                    $(".editarusr").css({
+                        cursor: "pointer",
+                        color: "blue"
+                    });
+                    $(".contaBC").css({
+                        cursor: "pointer",
+                        color: "blue"
+                    });
+                    $(".editarusr").click(function() {
+                        $("#editar_usr").modal("show");
+                        $("#editar_usr .idIn").val(this.dataset.id)
+                        $("#editar_usr .nameIn").val(this.dataset.name)
+                        $("#editar_usr .msgIn").val(this.dataset.msg)
+                        $("#editar_usr .imgIn").attr("src", "php/" + this.dataset.img)
+                    });
+                    $(".enviando_sub").click(function() {
+                        $(this).attr("disabled", "")
+                        if ($("#editar_usr .nameIn").val() == "") {
+                            alert("Fill in the name field correctly!");
+                            $(this).removeAttr("disabled")
+                        } else {
+                            $("#newedit").submit();
+                            // window.location = "./about.php";
+                        }
+                    });
+
+
+                    $(".excluir").each(function() {
+
+                        if ($(this).text() == "DELETE") {
+                            $(this).addClass("text-danger")
+                        } else {
+                            $(this).addClass("text-success")
+                        }
+
+                    })
+
+                    $(".excluir").click(function() {
+
+                        var id_data = this.dataset.id
+                        var name_data = this.dataset.title
+                        $('#excluirModal').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        })
+                        $("#excluirModal .modal-body").text('Are you sure you want to delete the service ' + name_data + ' in ID ' + id_data + ' ?');
+                        $("#excluirModal").modal('show')
+
+                        $("#btn_exluir_sim").click(function() {
+
+                            $('#btn_close').attr('hidden', true);
+                            $('#btn_exluir_nao').attr('hidden', true);
+
+                            $('#excluirModal').modal('hide')
+
+                            $.post("php/delete-service.php", {
+                                    id: id_data,
+
+                                },
+                                function(data, status) {
+                                    console.log(data);
+                                    if (data == "deletado") {
+                                        $("#excluirModal .modal-body").text('Service successfully deleted!');
+                                        $("#btn_exluir_sim").attr('hidden', true);
+                                        $('#btn_confirm').attr('hidden', false);
+                                        $('#excluirModal').modal('show')
+                                        $("#btn_confirm").click(function() {
+                                            window.location = "./service.php";
+                                        })
+
+
+                                    } else if (data == "erro") {
+
+                                        $("#excluirModal .modal-body").text('An error occurred while trying to delete the service, please try again!');
+                                        $('#btn_confirm').attr('hidden', false);
+                                        $('#excluirModal').modal('show');
+                                        $("#btn_confirm").click(function() {
+                                            window.location = "./service.php";
+                                        })
+                                    }
+
+
+                                })
+                        })
+                    })
+
+                    // preview imagem 
+                    $("#photo").change(function() {
+                        const file = this.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                $("#imgPreview")
+                                    .attr("src", event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    // preview imagem 1 
+                    $("#photo1").change(function() {
+                        const file = this.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                $("#imgPreview1")
+                                    .attr("src", event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+
+                    // tinymce.init({
+                    //     language: 'pt_BR',
+                    //     selector: "#text",
+                    //     activeEditor: true,
+                    //     plugins: [
+                    //         'advlist', 'image', 'table', 'autolink', 'emoticons', 'fullscreen', 'link', 'lists', 'media', 'paste', 'preview', 'print', 'save', 'searchreplace', 'wordcount'
+                    //     ],
+                    //     init_instance_callback: () => {
+                    //         tinymce.get("text").setContent($(".content").html());
+                    //     }
+                    // });
+                });
+            </script>
+
+            <script>
+
+            </script>
+
+            <!-- Core JS -->
+            <script src="assets/js/app.min.js"></script>
+            <script src="assets/js/script.js"></script>
+            <script src="assets/tinymce/tinymce.min.js"></script>
+
+</body>
+<?php
+mysqli_close($conn);
+?>
+
+</html>

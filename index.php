@@ -142,7 +142,51 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<?php 
+							include_once './administrative/connect.php';
+						
+							$select_service = "SELECT * FROM `service`";
+							$result_service = mysqli_query($conn,$select_service);
+							while($dados_service = mysqli_fetch_assoc($result_service)){
+	
+								$name = $dados_service['name'];
+								$description = $dados_service['description'];
+								$img = $dados_service['img'];
+	
+								echo"
+								<div class='col-md-6'>
+									<div class='row'>
+										<div class='col-md-12'>
+											<div class='colorlib-feature animate-box' data-animate-effect='fadeInLeft'>
+												<div class='colorlib-icon'>
+													<i class='flaticon-worker'></i>
+												</div>
+												<div class='colorlib-text'>
+													<h3>$name</h3>
+													<p>$description </p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class='col-md-6'>
+									<div class='row'>
+										<div class='col-md-6'>
+											<a href='services.html' class='services-wrap animate-box' data-animate-effect='fadeInRight'>
+												<div class='services-img' style='background-image: url(./administrative/php/$img)'></div>
+												<div class='desc'>
+													<h3>$name</h3>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								";
+							}	
+						
+						?>
+						<!-- <div class="col-md-6">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft">
@@ -186,8 +230,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
+						</div> -->
+						<!-- <div class="col-md-6">
 							<div class="row">
 								<div class="col-md-6">
 									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
@@ -224,7 +268,7 @@
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

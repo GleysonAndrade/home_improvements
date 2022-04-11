@@ -20,7 +20,41 @@
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">
-						<div class="col-md-6">
+						<?php 
+
+						// session_start();
+						include_once './administrative/connect.php';
+						
+						$select_service = "SELECT * FROM `service`";
+						$result_service = mysqli_query($conn,$select_service);
+						while($dados_service = mysqli_fetch_assoc($result_service)){
+
+							$name = $dados_service['name'];
+							$description = $dados_service['description'];
+							// $img = $dados_service['img'];
+
+							echo"
+							
+							<div class='col-md-6'>
+							<div class='row'>
+								<div class='col-md-12'>
+									<div class='colorlib-feature animate-box' data-animate-effect='fadeInLeft'>
+										<div class='colorlib-icon'>
+											<i class='flaticon-worker'></i>
+										</div>
+										<div class='colorlib-text'>
+											<h3>$name</h3>
+											<p>$description. </p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							
+							";
+						}
+						?>
+						<!-- <div class="col-md-6">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft">
@@ -44,8 +78,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
+						</div> -->
+						<!-- <div class="col-md-6">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft">
@@ -69,12 +103,12 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-4">
-							<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
-								<div class="services-img" style="background-image: url(images/services-1.jpg)"></div>
+							<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+								<div class="services-img" style="background-image: url('./administrative/php/$img')"></div>
 								<div class="desc">
 									<h3>Design &amp; Build</h3>
 								</div>
@@ -96,24 +130,47 @@
 								</div>
 							</a>
 						</div>
-					</div>
+					</div> -->
 					<div class="row">
-						<div class="col-md-4">
+						<?php 
+							include_once './administrative/connect.php';
+						
+							$select_service1 = "SELECT * FROM `service`";
+							$result_service1 = mysqli_query($conn,$select_service1);
+							while($dados_service1 = mysqli_fetch_assoc($result_service1)){
+	
+								$name1 = $dados_service1['name'];
+								$img = $dados_service1['img'];
+	
+								echo"
+								<div class='col-md-4'>
+									<a href='services.html' class='services-wrap animate-box' data-animate-effect='fadeInRight'>
+										<div class='services-img' style='background-image: url(./administrative/php/$img)'>
+										</div>
+										<div class='desc'>
+											<h3>$name1</h3>
+										</div>
+									</a>
+								</div>
+								";
+							}
+						?>
+						<!-- <div class="col-md-4">
 							<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 								<div class="services-img" style="background-image: url(images/services-4.jpg)"></div>
 								<div class="desc">
 									<h3>Painting &amp; Tiling</h3>
 								</div>
 							</a>
-						</div>
-						<div class="col-md-4">
+						</div> -->
+						<!-- <div class="col-md-4">
 							<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 								<div class="services-img" style="background-image: url(images/services-5.jpg)"></div>
 								<div class="desc">
 									<h3>Kitchen Remodeling</h3>
 								</div>
 							</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

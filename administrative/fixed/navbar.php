@@ -53,6 +53,25 @@
                     </li>
                 </ul>
             </li>
+            <!-- page service-->
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-home"></i>
+                    </span>
+                    <span class="title">Service-Job</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="service.php">
+                            Service
+                        </a>
+                    </li>
+                </ul>
+            </li>
             </li>
             <li class="nav-item dropdown">
                 <!-- <a class="dropdown-toggle" href="javascript:void(0);">
